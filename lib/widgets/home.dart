@@ -3,6 +3,7 @@ import 'package:flux_rss/models/parser.dart';
 import 'package:webfeed/webfeed.dart';
 import 'package:flux_rss/widgets/chargement.dart';
 import 'package:flux_rss/widgets/liste.dart';
+import 'package:flux_rss/widgets/grille.dart';
 
 class Home extends StatefulWidget {
   Home({Key key, this.title}) : super(key: key);
@@ -28,6 +29,17 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(widget.title),
+        actions: <Widget>[
+          new IconButton(
+            icon: new Icon(Icons.refresh),
+            onPressed: () {
+              setState(() {
+                feed = null;
+                parse();
+              });
+            },
+          )
+        ],
       ),
       body: choixDuBody(),
       // This trailing comma makes auto-formatting nicer for build methods.
@@ -44,6 +56,7 @@ class _HomeState extends State<Home> {
         return new Liste(feed);
       } else {
         // Grille
+        return new Grille(feed);
       }
     }
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:webfeed/webfeed.dart';
 import 'package:flux_rss/widgets/text_alex.dart';
 import 'package:flux_rss/models/date_convertisseur.dart';
+import 'package:flux_rss/widgets/page_detail.dart';
 
 class Liste extends StatefulWidget {
   RssFeed feed;
@@ -26,7 +27,13 @@ class _ListeState extends State<Liste> {
             child: new Card(
                 elevation: 10,
                 child: new InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    print("youhou");
+                    Navigator.push(context,
+                        new MaterialPageRoute(builder: (BuildContext context) {
+                      return new PageDetail(item);
+                    }));
+                  },
                   child: new Column(
                     children: <Widget>[
                       padding(),
@@ -35,7 +42,10 @@ class _ListeState extends State<Liste> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           // new TexteAlex(item.author),
-                          new TexteAlex(new DateConvertisseur().convertirDate(item.pubDate), color: Colors.red)
+                          new TexteAlex(
+                              new DateConvertisseur()
+                                  .convertirDate(item.pubDate),
+                              color: Colors.red)
                         ],
                       ),
                       padding(),
@@ -61,6 +71,7 @@ class _ListeState extends State<Liste> {
                     ],
                   ),
                 )),
+            padding: EdgeInsets.only(right: 7.5, left: 7.5),
           );
         });
   }
